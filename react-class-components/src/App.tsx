@@ -2,39 +2,10 @@ import React, { Component } from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ListOfPeople from "./components/ListOfPeople/ListOfPeople";
-
-interface Data {
-  count: number;
-  next: string;
-  previous: string | null;
-  results: Results[];
-}
-
-interface Results {
-  birth_year: string;
-  created: string;
-  edited: string;
-  eye_color: string;
-  films: string[];
-  gender: string;
-  hair_color: string;
-  height: string;
-  homeworld: string;
-  mass: string;
-  name: string;
-  skin_color: string;
-  species: [];
-  starships: string[];
-  url: string;
-  vehicles: string[];
-}
-
-interface AppState {
-  data: Data;
-}
+import { AppState, Results } from "./interface";
 export default class App extends Component {
   state: Readonly<AppState> = {
-    data: {
+    dataOfPeople: {
       count: 0,
       next: "",
       previous: null,
@@ -49,7 +20,7 @@ export default class App extends Component {
     try {
       const response = await fetch("https://swapi.dev/api/people/?page=1");
       const data = await response.json();
-      console.log(data);
+      this.setState({ dataOfPeople: data });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -58,7 +29,7 @@ export default class App extends Component {
     return (
       <>
         <SearchBar />
-        <ListOfPeople result={this.state.data}/>
+        <ListOfPeople result={this.state.dataOfPeople.results as Results[]} />
       </>
     );
   }

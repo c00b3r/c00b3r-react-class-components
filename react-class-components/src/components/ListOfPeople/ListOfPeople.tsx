@@ -1,7 +1,18 @@
 import React, { Component } from "react";
+import { Results } from "../../interface";
 
-export default class ListOfPeople extends Component {
+interface ListOfPeopleProps {
+  result: Results[];
+}
+
+export default class ListOfPeople extends Component<ListOfPeopleProps> {
   render() {
-    return <div>List of people</div>;
+    return (
+      <div>
+        {this.props.result.map((peopleItem) => (
+          <p key={peopleItem.name}>{peopleItem.name}</p>
+        ))}
+      </div>
+    );
   }
 }
