@@ -28,7 +28,7 @@ export default class SearchBar extends Component<SearchBarProps> {
 
   render() {
     return (
-      <div>
+      <div className="search-wrapper">
         <input
           type="text"
           value={this.state.valueInput}

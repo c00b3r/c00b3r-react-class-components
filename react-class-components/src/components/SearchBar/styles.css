@@ -1,9 +1,18 @@
 .search-wrapper {
   display: flex;
   gap: 20px;
-  max-width: 100%;
+  align-self: center;
+  height: 40%;
+  margin-top: 20px;
+  justify-content: center;
 }
 
 .search-wrapper input {
-  width: 70%;
+  width: 25%;
+  height: 100%;
+  align-self: center;
+}
+
+.search-wrapper button {
+  height: 20%;
 }
