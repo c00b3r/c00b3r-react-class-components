@@ -12,23 +12,38 @@ export default class App extends Component {
       results: [],
     },
   };
-  componentDidMount(): void {
-    this.fetchDataOfPeople();
+
+  constructor(props: object) {
+    super(props);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
-  fetchDataOfPeople = async () => {
+  componentDidMount(): void {
+    const searchParam = localStorage.getItem("prevSearchItem") || "";
+    this.fetchDataOfPeople(searchParam);
+  }
+
+  fetchDataOfPeople = async (searchParam: string) => {
     try {
-      const response = await fetch("https://swapi.dev/api/people/?page=1");
+      const response = await fetch(
+        `https://swapi.dev/api/people/?search=${searchParam}`,
+      );
       const data = await response.json();
       this.setState({ dataOfPeople: data });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
+  handleSearch(searchParam: string): void {
+    localStorage.setItem("prevSearchItem", searchParam);
+    this.fetchDataOfPeople(searchParam);
+  }
+
   render() {
     return (
       <>
-        <SearchBar />
+        <SearchBar onSearch={this.handleSearch} />
         <ListOfPeople result={this.state.dataOfPeople.results as Results[]} />
       </>
     );

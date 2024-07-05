@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import "./styles.css";
 
-export default class SearchBar extends Component {
+interface SearchBarProps {
+  onSearch: (searchParam: string) => void;
+}
+
+export default class SearchBar extends Component<SearchBarProps> {
   state: Readonly<{ valueInput: string }> = {
     valueInput: localStorage.getItem("prevSearchItem") ?? "",
   };
 
-  constructor(props: string) {
+  constructor(props: SearchBarProps) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
@@ -17,7 +21,7 @@ export default class SearchBar extends Component {
 
   handleClick() {
     if (this.state.valueInput) {
-      localStorage.setItem("prevSearchItem", this.state.valueInput);
+      this.props.onSearch(this.state.valueInput);
     }
     this.setState({ valueInput: "" });
   }
