@@ -11,6 +11,7 @@ export default class App extends Component {
       previous: null,
       results: [],
     },
+    loading: false,
   };
 
   constructor(props: object) {
@@ -24,12 +25,16 @@ export default class App extends Component {
   }
 
   fetchDataOfPeople = async (searchParam: string) => {
+    this.setState({ loading: true });
     try {
       const response = await fetch(
         `https://swapi.dev/api/people/?search=${searchParam}`,
       );
       const data = await response.json();
-      this.setState({ dataOfPeople: data });
+      if (data) {
+        this.setState({ dataOfPeople: data });
+        this.setState({ loading: false });
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -44,7 +49,10 @@ export default class App extends Component {
     return (
       <>
         <SearchBar onSearch={this.handleSearch} />
-        <ListOfPeople result={this.state.dataOfPeople.results as Results[]} />
+        <ListOfPeople
+          result={this.state.dataOfPeople.results as Results[]}
+          loadingData={this.state.loading}
+        />
       </>
     );
   }

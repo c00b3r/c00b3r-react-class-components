@@ -15,3 +15,12 @@
   padding: 10px;
   border-radius: 8px;
 }
+
+.loading-container {
+  font-weight: bold;
+  margin: 0 auto;
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  padding: 20px;
+}
