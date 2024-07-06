@@ -24,6 +24,10 @@ export default class App extends Component {
     this.fetchDataOfPeople(searchParam);
   }
 
+  // componentDidUpdate(): void {
+  //   throw new Error("test error");
+  // }
+
   fetchDataOfPeople = async (searchParam: string) => {
     this.setState({ loading: true });
     try {
@@ -36,7 +40,9 @@ export default class App extends Component {
         this.setState({ loading: false });
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      this.setState({ loading: false });
+      // console.error("Error fetching data:", error);
+      throw error;
     }
   };
 
