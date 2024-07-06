@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format:fix": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -39,7 +39,7 @@
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "husky": "^9.0.11",
+    "husky": "^8.0.0",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
     "typescript": "^5.2.2",
