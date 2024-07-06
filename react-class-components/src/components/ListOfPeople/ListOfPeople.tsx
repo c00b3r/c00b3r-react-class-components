@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Results } from "../../interface";
 import "./styles.css";
 
@@ -7,7 +7,7 @@ interface ListOfPeopleProps {
   loadingData: boolean;
 }
 
-export default class ListOfPeople extends Component<ListOfPeopleProps> {
+export default class ListOfPeople extends React.Component<ListOfPeopleProps> {
   render() {
     return (
       <div className="list-characters-wrapper">

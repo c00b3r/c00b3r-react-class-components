@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ListOfPeople from "./components/ListOfPeople/ListOfPeople";
 import { AppState, Results } from "./interface";
 
-export default class App extends Component {
+export default class App extends React.Component {
   state: Readonly<AppState> = {
     dataOfPeople: {
       count: 0,
