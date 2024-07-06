@@ -29,7 +29,7 @@ export default class App extends Component {
 
   componentDidUpdate(): void {
     if (this.state.errorHandler) {
-      throw new Error('test error');
+      throw new Error("test error");
     }
   }
 
