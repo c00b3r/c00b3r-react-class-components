@@ -34,7 +34,7 @@ export default class SearchBar extends Component<SearchBarProps> {
           value={this.state.valueInput}
           onChange={(event) => this.handleChange(event)}
         />
-        <button onClick={this.handleClick}>Seatch</button>
+        <button onClick={this.handleClick}>Search</button>
       </div>
     );
   }
