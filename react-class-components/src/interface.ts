@@ -27,4 +27,5 @@ export interface Results {
 export interface AppState {
   dataOfPeople: Data;
   loading: boolean;
+  errorHandler: boolean;
 }

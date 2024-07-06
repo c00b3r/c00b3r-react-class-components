@@ -3,6 +3,7 @@ import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ListOfPeople from "./components/ListOfPeople/ListOfPeople";
 import { AppState, Results } from "./interface";
+
 export default class App extends Component {
   state: Readonly<AppState> = {
     dataOfPeople: {
@@ -12,11 +13,13 @@ export default class App extends Component {
       results: [],
     },
     loading: false,
+    errorHandler: false,
   };
 
   constructor(props: object) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
 
   componentDidMount(): void {
@@ -24,9 +27,11 @@ export default class App extends Component {
     this.fetchDataOfPeople(searchParam);
   }
 
-  // componentDidUpdate(): void {
-  //   throw new Error("test error");
-  // }
+  componentDidUpdate(): void {
+    if (this.state.errorHandler) {
+      throw new Error("test error");
+    }
+  }
 
   fetchDataOfPeople = async (searchParam: string) => {
     this.setState({ loading: true });
@@ -51,10 +56,20 @@ export default class App extends Component {
     this.fetchDataOfPeople(searchParam);
   }
 
+  handleError() {
+    this.setState({ errorHandler: true });
+  }
+
   render() {
     return (
       <>
         <SearchBar onSearch={this.handleSearch} />
+        <button
+          style={{ background: "red", color: "white", fontWeight: "bolder" }}
+          onClick={this.handleError}
+        >
+          Error Handler
+        </button>
         <ListOfPeople
           result={this.state.dataOfPeople.results as Results[]}
           loadingData={this.state.loading}
