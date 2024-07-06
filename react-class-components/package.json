@@ -2,7 +2,7 @@
   "name": "react-class-components",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://c00b3r.github.io/c00b3r-react-class-components",
+  "homepage": "https://c00b3r.github.io/c00b3r-react-class-components/react-class-components",
   "type": "module",
   "scripts": {
     "dev": "vite",
