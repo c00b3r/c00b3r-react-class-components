@@ -23,7 +23,7 @@ export default class App extends Component {
   }
 
   componentDidMount(): void {
-    const searchParam = localStorage.getItem("prevSearchItem") || "";
+    const searchParam = localStorage.getItem('prevSearchItem') || "";
     this.fetchDataOfPeople(searchParam);
   }
 

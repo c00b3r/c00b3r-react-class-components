@@ -1,6 +1,5 @@
 {
   "semi": true,
   "tabWidth": 2,
-  "trailingComma": "all",
-  "editor.formatOnSave": true
+  "trailingComma": "all"
 }
