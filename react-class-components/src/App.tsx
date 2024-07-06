@@ -46,14 +46,19 @@ export default class App extends Component {
       }
     } catch (error) {
       this.setState({ loading: false });
-      // console.error("Error fetching data:", error);
+      console.error("Error fetching data:", error);
       throw error;
     }
   };
 
   handleSearch(searchParam: string): void {
-    localStorage.setItem("prevSearchItem", searchParam);
-    this.fetchDataOfPeople(searchParam);
+    const trimmedSearchParam = searchParam.trim();
+    if (trimmedSearchParam === "") {
+      localStorage.removeItem("prevSearchItem");
+    } else {
+      localStorage.setItem("prevSearchItem", trimmedSearchParam);
+    }
+    this.fetchDataOfPeople(trimmedSearchParam);
   }
 
   handleError() {
