@@ -23,13 +23,13 @@ export default class App extends Component {
   }
 
   componentDidMount(): void {
-    const searchParam = localStorage.getItem('prevSearchItem') || "";
+    const searchParam = localStorage.getItem("prevSearchItem") || "";
     this.fetchDataOfPeople(searchParam);
   }
 
   componentDidUpdate(): void {
     if (this.state.errorHandler) {
-      throw new Error("test error");
+      throw new Error('test error');
     }
   }
 
