@@ -1,79 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ListOfPeople from "./components/ListOfPeople/ListOfPeople";
-import { AppState, Results } from "./interface";
+import { Data, Results } from "./interface";
 
-export default class App extends React.Component {
-  state: Readonly<AppState> = {
-    dataOfPeople: {
-      count: 0,
-      next: "",
-      previous: null,
-      results: [],
-    },
-    loading: false,
-    errorHandler: false,
-  };
+export default function App() {
+  const [dataOfPeople, setDataOfPeople] = useState<Data>({
+    count: 0,
+    next: "",
+    previous: null,
+    results: [],
+  });
+  const [loading, setLoading] = useState<boolean>(false);
 
-  constructor(props: object) {
-    super(props);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleError = this.handleError.bind(this);
-  }
-
-  componentDidMount(): void {
-    const searchParam = localStorage.getItem("prevSearchItem") || "";
-    this.fetchDataOfPeople(searchParam);
-  }
-
-  componentDidUpdate(): void {
-    if (this.state.errorHandler) {
-      throw new Error("test error");
-    }
-  }
-
-  fetchDataOfPeople = async (searchParam: string) => {
-    this.setState({ loading: true });
+  const fetchDataOfPeople = async (searchParam: string) => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://swapi.dev/api/people/?search=${searchParam}`,
       );
       const data = await response.json();
       if (data) {
-        this.setState({ dataOfPeople: data });
-        this.setState({ loading: false });
+        setDataOfPeople(data);
+        setLoading(false);
       }
     } catch (error) {
-      this.setState({ loading: false });
+      setLoading(false);
       console.error("Error fetching data:", error);
       throw error;
     }
   };
 
-  handleSearch(searchParam: string): void {
+  function handleSearch(searchParam: string): void {
     const trimmedSearchParam = searchParam.trim();
     if (trimmedSearchParam === "") {
       localStorage.removeItem("prevSearchItem");
     } else {
       localStorage.setItem("prevSearchItem", trimmedSearchParam);
     }
-    this.fetchDataOfPeople(trimmedSearchParam);
+    fetchDataOfPeople(trimmedSearchParam);
   }
 
-  handleError() {
-    this.setState({ errorHandler: true });
-  }
-
-  render() {
-    return (
-      <>
-        <SearchBar onSearch={this.handleSearch} />
-        <ListOfPeople
-          result={this.state.dataOfPeople.results as Results[]}
-          loadingData={this.state.loading}
-        />
-      </>
-    );
-  }
+  useEffect(() => {
+    const searchParam = localStorage.getItem("prevSearchItem") || "";
+    fetchDataOfPeople(searchParam);
+  }, []);
+  return (
+    <>
+      <SearchBar onSearch={handleSearch} />
+      <ListOfPeople
+        result={dataOfPeople.results as Results[]}
+        loadingData={loading}
+      />
+    </>
+  );
 }

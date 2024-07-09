@@ -7,26 +7,27 @@ interface ListOfPeopleProps {
   loadingData: boolean;
 }
 
-export default class ListOfPeople extends React.Component<ListOfPeopleProps> {
-  render() {
-    return (
-      <div className="list-characters-wrapper">
-        {this.props.loadingData ? (
-          <div className="loading-container">Loading data, please wait</div>
-        ) : (
-          this.props.result.map((peopleItem) => (
-            <div key={peopleItem.name} className="person-wrapper">
-              <h3 className="person-name">{peopleItem.name}</h3>
-              <p className="person-birthday">
-                Birh Date:{" "}
-                <span style={{ fontWeight: "bold" }}>
-                  {peopleItem.birth_year}
-                </span>
-              </p>
-            </div>
-          ))
-        )}
-      </div>
-    );
-  }
+export default function ListOfPeople({
+  result,
+  loadingData,
+}: ListOfPeopleProps) {
+  return (
+    <div className="list-characters-wrapper">
+      {loadingData ? (
+        <div className="loading-container">Loading data, please wait</div>
+      ) : (
+        result.map((peopleItem) => (
+          <div key={peopleItem.name} className="person-wrapper">
+            <h3 className="person-name">{peopleItem.name}</h3>
+            <p className="person-birthday">
+              Birh Date:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {peopleItem.birth_year}
+              </span>
+            </p>
+          </div>
+        ))
+      )}
+    </div>
+  );
 }
