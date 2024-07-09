@@ -69,12 +69,6 @@ export default class App extends React.Component {
     return (
       <>
         <SearchBar onSearch={this.handleSearch} />
-        <button
-          style={{ background: "red", color: "white", fontWeight: "bolder" }}
-          onClick={this.handleError}
-        >
-          Error Handler
-        </button>
         <ListOfPeople
           result={this.state.dataOfPeople.results as Results[]}
           loadingData={this.state.loading}

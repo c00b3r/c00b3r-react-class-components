@@ -8,9 +8,10 @@
 }
 
 .search-wrapper input {
-  width: 25%;
-  height: 100%;
+  width: 250px;
+  height: 30px;
   align-self: center;
+  outline: none;
 }
 
 .search-wrapper button {

@@ -20,9 +20,8 @@ export default class SearchBar extends Component<SearchBarProps> {
   }
 
   handleClick() {
-    if (this.state.valueInput) {
-      this.props.onSearch(this.state.valueInput);
-    }
+    this.props.onSearch(this.state.valueInput);
+
     this.setState({ valueInput: "" });
   }
 
