@@ -3,6 +3,7 @@ import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ListOfPeople from "./components/ListOfPeople/ListOfPeople";
 import { Data, Results } from "./interface";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 export default function App() {
   const [dataOfPeople, setDataOfPeople] = useState<Data>({
@@ -12,6 +13,8 @@ export default function App() {
     results: [],
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const [localStorageItem, setLocalStorageItem] =
+    useLocalStorage("prevSearchItem");
 
   const fetchDataOfPeople = async (searchParam: string) => {
     setLoading(true);
@@ -36,15 +39,15 @@ export default function App() {
     if (trimmedSearchParam === "") {
       localStorage.removeItem("prevSearchItem");
     } else {
-      localStorage.setItem("prevSearchItem", trimmedSearchParam);
+      setLocalStorageItem(trimmedSearchParam);
     }
     fetchDataOfPeople(trimmedSearchParam);
   }
 
   useEffect(() => {
-    const searchParam = localStorage.getItem("prevSearchItem") || "";
-    fetchDataOfPeople(searchParam);
-  }, []);
+    fetchDataOfPeople(localStorageItem);
+  }, [localStorageItem]);
+
   return (
     <>
       <SearchBar onSearch={handleSearch} />
