@@ -4,6 +4,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import ListOfPeople from "./components/ListOfPeople/ListOfPeople";
 import { Data, Results } from "./interface";
 import useLocalStorage from "./hooks/useLocalStorage";
+import fetchDataOfPeopleApi from "./service/api";
 
 export default function App() {
   const [dataOfPeople, setDataOfPeople] = useState<Data>({
@@ -16,13 +17,11 @@ export default function App() {
   const [localStorageItem, setLocalStorageItem] =
     useLocalStorage("prevSearchItem");
 
-  const fetchDataOfPeople = async (searchParam: string) => {
+  const getDataOfPeople = async (searchParam: string) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://swapi.dev/api/people/?search=${searchParam}`,
-      );
-      const data = await response.json();
+      const data: Data = await fetchDataOfPeopleApi(searchParam);
+      console.log(data);
       if (data) {
         setDataOfPeople(data);
         setLoading(false);
@@ -41,11 +40,11 @@ export default function App() {
     } else {
       setLocalStorageItem(trimmedSearchParam);
     }
-    fetchDataOfPeople(trimmedSearchParam);
+    getDataOfPeople(trimmedSearchParam);
   }
 
   useEffect(() => {
-    fetchDataOfPeople(localStorageItem);
+    getDataOfPeople(localStorageItem);
   }, [localStorageItem]);
 
   return (
