@@ -1,0 +1,16 @@
+.peopleInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.peopleInfo p {
+  padding: 0;
+  margin: 0;
+}

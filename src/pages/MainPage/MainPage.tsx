@@ -48,7 +48,7 @@ export default function MainPage() {
   }, [localStorageItem]);
 
   return (
-    <>
+    <div className="main-wrapper">
       <SearchBar onSearch={handleSearch} />
       <main>
         <ListOfPeople
@@ -57,6 +57,6 @@ export default function MainPage() {
         />
         <Outlet />
       </main>
-    </>
+    </div>
   );
 }
