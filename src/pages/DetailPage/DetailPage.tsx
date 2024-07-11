@@ -1,35 +1,22 @@
 import React, { useEffect, useRef } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import "./DetailPage.css";
-
-interface personData {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-  homeworld: string;
-  films: string[];
-  species: string[];
-  vehicles: string[];
-  starships: string[];
-  created: string;
-  edited: string;
-  url: string;
-}
+import { personData } from "../../interface";
 
 export default function DetailPage() {
   const result = useLoaderData() as personData;
   const ref = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClose = () => {
+    navigate(`/${location.search}`);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
-        navigate("/");
+        navigate(`/${location.search}`);
       }
     };
 
@@ -37,7 +24,7 @@ export default function DetailPage() {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [navigate]);
+  }, [navigate, location]);
 
   return (
     <div className="peopleInfo" ref={ref}>
@@ -54,9 +41,7 @@ export default function DetailPage() {
       <p>
         <span style={{ fontWeight: "bold" }}>Gender</span> {result.gender}
       </p>
-      <button onClick={() => (ref.current!.style.display = "none")}>
-        Close
-      </button>
+      <button onClick={handleClose}>Close</button>
     </div>
   );
 }

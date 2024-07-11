@@ -1,17 +1,32 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Results } from "../../interface";
 import "./styles.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 interface ListOfPeopleProps {
   result: Results[];
   loadingData: boolean;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export default function ListOfPeople({
   result,
   loadingData,
+  page,
+  setPage,
 }: ListOfPeopleProps) {
+  const location = useLocation();
+
+  const handlePreviousClick = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    setPage(page + 1);
+  };
   return (
     <div className="list-characters-wrapper">
       {loadingData ? (
@@ -19,7 +34,7 @@ export default function ListOfPeople({
       ) : result && result.length ? (
         result.map((peopleItem) => (
           <NavLink
-            to={`/people/${peopleItem.url.split("/")[5]}`}
+            to={`/people/${peopleItem.url.split("/")[5]}${location.search}`}
             key={peopleItem.name}
             className="person-wrapper"
           >
@@ -31,6 +46,13 @@ export default function ListOfPeople({
           = Data Not Found =
         </h4>
       )}
+      <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+        <button disabled={page === 1} onClick={handlePreviousClick}>
+          ←
+        </button>
+        <p>{page}</p>
+        <button onClick={handleNextClick}>→</button>
+      </div>
     </div>
   );
 }

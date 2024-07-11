@@ -19,12 +19,6 @@ const root = createBrowserRouter([
         element: <DetailPage />,
         loader: loaderPersonData,
       },
-      {
-        path: "/?search=",
-      },
-      {
-        path: "/page=:numberPage",
-      },
     ],
   },
 ]);
