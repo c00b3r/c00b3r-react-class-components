@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Data, Results } from "../../interface";
+import { Data } from "../../interface";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import fetchDataOfPeopleApi from "../../service/api";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -55,10 +55,13 @@ export default function MainPage() {
 
   return (
     <div className="main-wrapper">
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar
+        onSearch={handleSearch}
+        updateLocalStorageItem={setLocalStorageItem}
+      />
       <main>
         <ListOfPeople
-          result={dataOfPeople.results as Results[]}
+          data={dataOfPeople as Data}
           loadingData={loading}
           page={parseInt(searchParams.get("page") || "1", 10)}
           setPage={(page) => {

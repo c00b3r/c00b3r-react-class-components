@@ -1,22 +1,24 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { Results } from "../../interface";
+import { Data } from "../../interface";
 import "./styles.css";
 import { NavLink, useLocation } from "react-router-dom";
 
 interface ListOfPeopleProps {
-  result: Results[];
+  data: Data;
   loadingData: boolean;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
 }
 
 export default function ListOfPeople({
-  result,
+  data,
   loadingData,
   page,
   setPage,
 }: ListOfPeopleProps) {
+  const result = data.results;
   const location = useLocation();
+  console.log(data);
 
   const handlePreviousClick = () => {
     if (page > 1) {
@@ -51,7 +53,12 @@ export default function ListOfPeople({
           ←
         </button>
         <p>{page}</p>
-        <button onClick={handleNextClick}>→</button>
+        <button
+          disabled={data.next === null ? true : false}
+          onClick={handleNextClick}
+        >
+          →
+        </button>
       </div>
     </div>
   );
