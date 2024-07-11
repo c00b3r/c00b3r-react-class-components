@@ -10,4 +10,11 @@ async function fetchDataOfPeopleApi(
   return data;
 }
 
+export async function fetchDataOfPersonApi(idOfPerson: string | undefined) {
+  const response = await fetch(`https://swapi.dev/api/people/${idOfPerson}`);
+  const data = await response.json();
+
+  return data;
+}
+
 export default fetchDataOfPeopleApi;

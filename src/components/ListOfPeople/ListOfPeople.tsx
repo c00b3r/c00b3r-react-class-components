@@ -1,6 +1,7 @@
 import React from "react";
 import { Results } from "../../interface";
 import "./styles.css";
+import { NavLink } from "react-router-dom";
 
 interface ListOfPeopleProps {
   result: Results[];
@@ -15,18 +16,20 @@ export default function ListOfPeople({
     <div className="list-characters-wrapper">
       {loadingData ? (
         <div className="loading-container">Loading data, please wait</div>
-      ) : (
+      ) : result && result.length ? (
         result.map((peopleItem) => (
-          <div key={peopleItem.name} className="person-wrapper">
+          <NavLink
+            to={`/people/${peopleItem.url.split("/")[5]}`}
+            key={peopleItem.name}
+            className="person-wrapper"
+          >
             <h3 className="person-name">{peopleItem.name}</h3>
-            <p className="person-birthday">
-              Birh Date:{" "}
-              <span style={{ fontWeight: "bold" }}>
-                {peopleItem.birth_year}
-              </span>
-            </p>
-          </div>
+          </NavLink>
         ))
+      ) : (
+        <h4 style={{ grid: "none", margin: "0 auto", display: "" }}>
+          = Data Not Found =
+        </h4>
       )}
     </div>
   );
