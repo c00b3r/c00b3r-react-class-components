@@ -48,18 +48,20 @@ export default function ListOfPeople({
           = Data Not Found =
         </h4>
       )}
-      <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-        <button disabled={page === 1} onClick={handlePreviousClick}>
-          ←
-        </button>
-        <p>{page}</p>
-        <button
-          disabled={data.next === null ? true : false}
-          onClick={handleNextClick}
-        >
-          →
-        </button>
-      </div>
+      {data.count > 10 ? (
+        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <button disabled={page === 1} onClick={handlePreviousClick}>
+            ←
+          </button>
+          <p>{page}</p>
+          <button
+            disabled={data.next === null ? true : false}
+            onClick={handleNextClick}
+          >
+            →
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
