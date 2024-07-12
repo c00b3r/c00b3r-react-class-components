@@ -30,26 +30,37 @@ export default function ListOfPeople({
     setPage(page + 1);
   };
   return (
-    <div className="list-characters-wrapper">
-      {loadingData ? (
-        <div className="loading-container">Loading data, please wait</div>
-      ) : result && result.length ? (
-        result.map((peopleItem) => (
-          <NavLink
-            to={`/people/${peopleItem.url.split("/")[5]}${location.search}`}
-            key={peopleItem.name}
-            className="person-wrapper"
-          >
-            <h3 className="person-name">{peopleItem.name}</h3>
-          </NavLink>
-        ))
-      ) : (
-        <h4 style={{ grid: "none", margin: "0 auto", display: "" }}>
-          = Data Not Found =
-        </h4>
-      )}
+    <div className="list-people-wrapper">
+      <div className="list-characters-wrapper">
+        {loadingData ? (
+          <h3 className="loading-container">Loading data, please wait</h3>
+        ) : result && result.length ? (
+          result.map((peopleItem) => (
+            <NavLink
+              to={`/people/${peopleItem.url.split("/")[5]}${location.search}`}
+              key={peopleItem.name}
+              className={({ isActive, isPending }) =>
+                `person-wrapper ${isActive ? "active" : ""} ${isPending ? "pending" : ""}`
+              }
+            >
+              <h3 className="person-name">{peopleItem.name}</h3>
+            </NavLink>
+          ))
+        ) : (
+          <h4 style={{ grid: "none", margin: "0 auto", display: "" }}>
+            = Data Not Found =
+          </h4>
+        )}
+      </div>
       {data.count > 10 ? (
-        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            alignSelf: "center",
+          }}
+        >
           <button disabled={page === 1} onClick={handlePreviousClick}>
             ←
           </button>
