@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Data } from "../../interface";
 import "./styles.css";
 import { NavLink, useLocation } from "react-router-dom";
@@ -18,7 +18,6 @@ export default function ListOfPeople({
 }: ListOfPeopleProps) {
   const result = data.results;
   const location = useLocation();
-  console.log(data);
 
   const handlePreviousClick = () => {
     if (page > 1) {
@@ -27,7 +26,9 @@ export default function ListOfPeople({
   };
 
   const handleNextClick = () => {
-    setPage(page + 1);
+    if (data.next) {
+      setPage(page + 1);
+    }
   };
   return (
     <div className="list-people-wrapper">

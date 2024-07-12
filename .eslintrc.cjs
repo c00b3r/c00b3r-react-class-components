@@ -25,5 +25,7 @@ module.exports = {
     ],
     "prettier/prettier": "error",
     "react-compiler/react-compiler": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
   },
 };
