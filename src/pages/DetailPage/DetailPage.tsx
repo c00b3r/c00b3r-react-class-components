@@ -15,7 +15,12 @@ export default function DetailPage() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      const target = event.target as HTMLElement;
+      if (
+        ref.current &&
+        !ref.current.contains(event.target as Node) &&
+        !target.closest("a")
+      ) {
         navigate(`/${location.search}`);
       }
     };
