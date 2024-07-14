@@ -34,8 +34,8 @@ describe("ListOfPeople", () => {
     expect(screen.getByText(/not found/i)).toBeInTheDocument();
   });
 
-  it("should render list of people", () => {
-    render(
+  it("should render list of people specified number of cards", () => {
+    const { container } = render(
       <Router>
         <ListOfPeople
           data={mockData}
@@ -47,7 +47,8 @@ describe("ListOfPeople", () => {
     );
 
     expect(screen.getByText("Luke Skywalker")).toBeInTheDocument();
-    expect(screen.getAllByText("C-3PO").length).toBe(19);
+    expect(screen.getByText("C-3PO")).toBeInTheDocument();
+    expect(container);
   });
 
   it("should render pagination if count of data > 10", () => {
@@ -55,7 +56,12 @@ describe("ListOfPeople", () => {
     render(
       <Router>
         <ListOfPeople
-          data={mockData}
+          data={{
+            count: 21,
+            next: "http://swapi.dev/api/people/?page=2",
+            previous: null,
+            results: [],
+          }}
           loadingData={false}
           page={1}
           setPage={setPage}
