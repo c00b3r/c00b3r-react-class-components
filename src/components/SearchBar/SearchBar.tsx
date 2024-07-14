@@ -35,6 +35,7 @@ export default function SearchBar({
         type="text"
         value={valueInput}
         onChange={(event) => handleChange(event)}
+        placeholder="Search..."
       />
       <button onClick={handleClick}>Search People</button>
     </div>

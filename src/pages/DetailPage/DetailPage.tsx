@@ -44,7 +44,7 @@ export default function DetailPage() {
         {result.birth_year}
       </p>
       <p>
-        <span style={{ fontWeight: "bold" }}>Gender</span> {result.gender}
+        <span style={{ fontWeight: "bold" }}>Gender:</span> {result.gender}
       </p>
       <button onClick={handleClose}>Close</button>
     </div>
