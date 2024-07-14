@@ -1,0 +1,19 @@
+.search-wrapper {
+  display: flex;
+  gap: 20px;
+  align-self: center;
+  height: 40%;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.search-wrapper input {
+  width: 250px;
+  height: 30px;
+  align-self: center;
+  outline: none;
+}
+
+.search-wrapper button {
+  height: 20%;
+}

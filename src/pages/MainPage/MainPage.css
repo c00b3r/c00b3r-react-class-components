@@ -1,0 +1,18 @@
+#root {
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  width: 1280px;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
