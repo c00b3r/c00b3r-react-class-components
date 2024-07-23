@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import "./DetailPage.css";
 import { personData } from "../../interface";

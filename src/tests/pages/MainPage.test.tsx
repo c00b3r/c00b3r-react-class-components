@@ -91,10 +91,13 @@ describe("MainPage", () => {
     expect(screen.getByText("Loading data, please wait")).toBeInTheDocument();
   });
 
-  it("handles API errors gracefully", async () => {
-    (fetchDataOfPeopleApi as Mock).mockRejectedValue(
-      new Error("Network error"),
-    );
+  it("displays appropriate message for empty API response", async () => {
+    (fetchDataOfPeopleApi as Mock).mockResolvedValue({
+      count: 0,
+      next: null,
+      previous: null,
+      results: [],
+    });
 
     render(
       <MemoryRouter>
@@ -103,11 +106,13 @@ describe("MainPage", () => {
     );
 
     const searchInput = screen.getByPlaceholderText("Search...");
-    fireEvent.change(searchInput, { target: { value: "Luke" } });
+    fireEvent.change(searchInput, {
+      target: { value: "Non-existing character" },
+    });
     fireEvent.keyDown(searchInput, { key: "Enter", code: "Enter" });
 
     await waitFor(() => {
-      expect(screen.getByText(/= Data Not Found =/)).toBeInTheDocument();
+      expect(screen.getByText(/Data not found/i)).toBeInTheDocument();
     });
   });
 

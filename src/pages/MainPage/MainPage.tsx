@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Data } from "../../interface";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import fetchDataOfPeopleApi from "../../service/api";
@@ -32,6 +32,8 @@ export default function MainPage() {
       setLoading(false);
       console.error("Error fetching data:", error);
       throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
