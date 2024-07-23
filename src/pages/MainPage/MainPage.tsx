@@ -6,6 +6,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import ListOfPeople from "../../components/ListOfPeople/ListOfPeople";
 import "./MainPage.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
+import { starWarsApi } from "../../store/thunks/starWarsApi";
 
 export default function MainPage() {
   const [dataOfPeople, setDataOfPeople] = useState<Data>({
@@ -19,6 +20,8 @@ export default function MainPage() {
     useLocalStorage("prevSearchItem");
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { data } = starWarsApi.useGetAllPeopleQuery();
+  console.log(data);
 
   const getDataOfPeople = async (searchParam: string, page: number) => {
     setLoading(true);

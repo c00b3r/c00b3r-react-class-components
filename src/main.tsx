@@ -7,6 +7,8 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage.tsx";
 import MainPage from "./pages/MainPage/MainPage.tsx";
 import { loader as loaderPersonData } from "./pages/DetailPage/DetailPageLoader.ts";
 import DetailPage from "./pages/DetailPage/DetailPage.tsx";
+import { Provider } from "react-redux";
+import store from "./store/store.ts";
 
 const root = createBrowserRouter([
   {
@@ -25,8 +27,10 @@ const root = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ErrorBoundary fallback={<p>Something went wrong, check console.</p>}>
-      <RouterProvider router={root} />
-    </ErrorBoundary>
+    <Provider store={store}>
+      <ErrorBoundary fallback={<p>Something went wrong, check console.</p>}>
+        <RouterProvider router={root} />
+      </ErrorBoundary>
+    </Provider>
   </React.StrictMode>,
 );
