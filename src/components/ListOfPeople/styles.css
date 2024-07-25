@@ -16,20 +16,23 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
   gap: 8px;
 }
 
 .person-wrapper {
   cursor: pointer;
   border: 1px solid grey;
-  padding: 0;
+  padding: 20px;
   width: 30%;
+  height: 20%;
   border-radius: 8px;
   color: white;
+  display: flex;
+  justify-content: center;
 }
-.person-wrapper:hover {
-  color: white;
+
+.person-wrapper input {
+  width: 10%;
 }
 
 .loading-container {
@@ -37,12 +40,20 @@
   padding: 20px;
 }
 
-.person-wrapper.active {
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(0, 0, 0);
-  color: black;
+a {
+  height: auto;
+  color: white;
+  font-size: 14px;
 }
 
-.person-wrapper.pending {
+a:hover {
+  color: gray;
+}
+
+a.active {
+  color: #535bf2;
+}
+
+a.pending {
   opacity: 0.3;
 }

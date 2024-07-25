@@ -19,7 +19,6 @@ export default function ListOfPeople({
 }: ListOfPeopleProps) {
   const dispatch: AppDispatch = useDispatch();
   const selectedItems = useSelector((state: RootState) => state.selectedItem);
-  console.log(selectedItems);
 
   const result = data.results;
   const location = useLocation();
@@ -44,20 +43,21 @@ export default function ListOfPeople({
       <div className="list-characters-wrapper">
         {result && result.length ? (
           result.map((peopleItem) => (
-            <NavLink
-              to={`/people/${peopleItem.url.split("/")[5]}${location.search}`}
-              key={peopleItem.name}
-              className={({ isActive, isPending }) =>
-                `person-wrapper ${isActive ? "active" : ""} ${isPending ? "pending" : ""}`
-              }
-            >
+            <div key={peopleItem.name} className="person-wrapper">
               <input
                 type="checkbox"
                 checked={selectedItems.includes(peopleItem.name)}
                 onChange={() => handleCheckboxChange(peopleItem.name)}
               />
-              <h3 className="person-name">{peopleItem.name}</h3>
-            </NavLink>
+              <NavLink
+                to={`/people/${peopleItem.url.split("/")[5]}${location.search}`}
+                className={({ isActive, isPending }) =>
+                  `${isActive ? "active" : ""} ${isPending ? "pending" : ""}`
+                }
+              >
+                <h3 className="person-name">{peopleItem.name}</h3>
+              </NavLink>
+            </div>
           ))
         ) : (
           <h4 style={{ grid: "none", margin: "0 auto", display: "" }}>
