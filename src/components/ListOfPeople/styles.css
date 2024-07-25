@@ -22,9 +22,9 @@
 .person-wrapper {
   cursor: pointer;
   border: 1px solid grey;
-  padding: 20px;
+  padding: 10px 10px;
   width: 30%;
-  height: 20%;
+  height: 15%;
   border-radius: 8px;
   color: white;
   display: flex;

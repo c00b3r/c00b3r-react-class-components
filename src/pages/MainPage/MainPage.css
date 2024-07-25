@@ -11,6 +11,14 @@ main {
   gap: 20px;
 }
 
+.main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .main-wrapper {
   display: flex;
   flex-direction: column;

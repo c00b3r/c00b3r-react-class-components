@@ -6,6 +6,7 @@ import ListOfPeople from "../../components/ListOfPeople/ListOfPeople";
 import "./MainPage.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { starWarsApi } from "../../store/thunks/starWarsApi";
+import FlyoutComponent from "../../components/FlyoutComponent/FlyoutComponent";
 
 export default function MainPage() {
   const [dataOfPeople, setDataOfPeople] = useState<Data | undefined>({
@@ -41,29 +42,32 @@ export default function MainPage() {
   }, [data]);
 
   return (
-    <div className="main-wrapper">
-      <SearchBar
-        onSearch={handleSearch}
-        updateLocalStorageItem={setLocalStorageItem}
-      />
-      {isLoading ? (
-        <h3 className="loading-container">Loading data, please wait</h3>
-      ) : (
-        <main>
-          <ListOfPeople
-            data={dataOfPeople as Data}
-            page={parseInt(searchParams.get("page") || "1", 10)}
-            setPage={(page) => {
-              setSearchParams({
-                search: localStorageItem,
-                page: page.toString(),
-              });
-              navigate(`/?search=${localStorageItem}&page=${page}`);
-            }}
-          />
-          <Outlet />
-        </main>
-      )}
+    <div className="main-page">
+      <div className="main-wrapper">
+        <SearchBar
+          onSearch={handleSearch}
+          updateLocalStorageItem={setLocalStorageItem}
+        />
+        {isLoading ? (
+          <h3 className="loading-container">Loading data, please wait</h3>
+        ) : (
+          <main>
+            <ListOfPeople
+              data={dataOfPeople as Data}
+              page={parseInt(searchParams.get("page") || "1", 10)}
+              setPage={(page) => {
+                setSearchParams({
+                  search: localStorageItem,
+                  page: page.toString(),
+                });
+                navigate(`/?search=${localStorageItem}&page=${page}`);
+              }}
+            />
+            <Outlet />
+          </main>
+        )}
+      </div>
+      <FlyoutComponent />
     </div>
   );
 }
