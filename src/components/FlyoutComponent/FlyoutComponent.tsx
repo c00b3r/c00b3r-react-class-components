@@ -11,6 +11,12 @@ export default function FlyoutComponent() {
     dispatch(clearSelectedItems());
   }
 
+  function convertToCSV(items: string[]): string {
+    const csvContent = items.join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    return URL.createObjectURL(blob);
+  }
+
   return (
     <>
       {selectedItems && selectedItems.length ? (
@@ -20,7 +26,13 @@ export default function FlyoutComponent() {
             <button className="tools__button" onClick={handleUnselectOnClick}>
               Unselect all
             </button>
-            <button className="tools__button">Download</button>
+            <a
+              className="tools__button"
+              href={convertToCSV(selectedItems)}
+              download={`starwars_${selectedItems.length}.csv`}
+            >
+              Download
+            </a>
           </div>
           <div className="favorite-items__list">
             {selectedItems.map((item, index) => (
