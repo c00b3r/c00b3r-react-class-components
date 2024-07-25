@@ -5,14 +5,12 @@ import { NavLink, useLocation } from "react-router-dom";
 
 interface ListOfPeopleProps {
   data: Data;
-  loadingData: boolean;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
 }
 
 export default function ListOfPeople({
   data,
-  loadingData,
   page,
   setPage,
 }: ListOfPeopleProps) {
@@ -33,9 +31,7 @@ export default function ListOfPeople({
   return (
     <div className="list-people-wrapper">
       <div className="list-characters-wrapper">
-        {loadingData ? (
-          <h3 className="loading-container">Loading data, please wait</h3>
-        ) : result && result.length ? (
+        {result && result.length ? (
           result.map((peopleItem) => (
             <NavLink
               to={`/people/${peopleItem.url.split("/")[5]}${location.search}`}

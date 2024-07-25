@@ -14,7 +14,6 @@ const root = createBrowserRouter([
   {
     path: "/",
     element: <MainPage />,
-    errorElement: <ErrorPage />,
     children: [
       {
         path: "/people/:id",
@@ -22,6 +21,7 @@ const root = createBrowserRouter([
         loader: loaderPersonData,
       },
     ],
+    errorElement: <ErrorPage />,
   },
 ]);
 
