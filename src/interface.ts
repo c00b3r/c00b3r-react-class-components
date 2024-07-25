@@ -48,3 +48,10 @@ export interface personData {
   edited: string;
   url: string;
 }
+
+export interface PeopleInfo {
+  name: string;
+  birthYear: string;
+  gender: string;
+  height: string;
+}

@@ -2,6 +2,7 @@ import { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import "./FlyoutComponent.css";
 import { clearSelectedItems } from "../../store/slices/selectedItemsSlice";
+import { PeopleInfo } from "../../interface";
 
 export default function FlyoutComponent() {
   const dispatch: AppDispatch = useDispatch();
@@ -11,8 +12,13 @@ export default function FlyoutComponent() {
     dispatch(clearSelectedItems());
   }
 
-  function convertToCSV(items: string[]): string {
-    const csvContent = items.join("\n");
+  function convertToCSV(items: PeopleInfo[]): string {
+    const csvContent = items
+      .map(
+        (item) =>
+          `${item.name},${item.birthYear},${item.gender},${item.height}`,
+      )
+      .join("\n");
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     return URL.createObjectURL(blob);
   }
@@ -36,7 +42,7 @@ export default function FlyoutComponent() {
           </div>
           <div className="favorite-items__list">
             {selectedItems.map((item, index) => (
-              <p key={index}>{item}</p>
+              <p key={index}>{item.name}</p>
             ))}
           </div>
         </div>

@@ -23,8 +23,20 @@ export default function ListOfPeople({
   const result = data.results;
   const location = useLocation();
 
-  const handleCheckboxChange = (peopleName: string) => {
-    dispatch(toggleItem(peopleName));
+  const handleCheckboxChange = (
+    peopleName: string,
+    peopleBirthYear: string,
+    peopleGender: string,
+    peopleHeight: string,
+  ) => {
+    dispatch(
+      toggleItem({
+        name: peopleName,
+        birthYear: peopleBirthYear,
+        gender: peopleGender,
+        height: peopleHeight,
+      }),
+    );
   };
 
   const handlePreviousClick = () => {
@@ -46,8 +58,17 @@ export default function ListOfPeople({
             <div key={peopleItem.name} className="person-wrapper">
               <input
                 type="checkbox"
-                checked={selectedItems.includes(peopleItem.name)}
-                onChange={() => handleCheckboxChange(peopleItem.name)}
+                checked={selectedItems.some(
+                  (item) => item.name === peopleItem.name,
+                )}
+                onChange={() =>
+                  handleCheckboxChange(
+                    peopleItem.name,
+                    peopleItem.birth_year,
+                    peopleItem.gender,
+                    peopleItem.height,
+                  )
+                }
               />
               <NavLink
                 to={`/people/${peopleItem.url.split("/")[5]}${location.search}`}

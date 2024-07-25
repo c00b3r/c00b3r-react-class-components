@@ -1,15 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PeopleInfo } from "../../interface";
+
+const initialState: PeopleInfo[] = [];
 
 const selectedItemsSlice = createSlice({
   name: "selectedItems",
-  initialState: [] as string[],
+  initialState,
   reducers: {
-    toggleItem: (state, action) => {
-      const itemName: string = action.payload;
-      if (state.includes(itemName)) {
-        return state.filter((item) => item !== itemName);
+    toggleItem: (state, action: PayloadAction<PeopleInfo>) => {
+      const item = action.payload;
+      const existingItemIndex = state.findIndex(
+        (selectedItem) => selectedItem.name === item.name,
+      );
+      if (existingItemIndex !== -1) {
+        state.splice(existingItemIndex, 1);
       } else {
-        return [...state, itemName];
+        state.push(item);
       }
     },
     clearSelectedItems: () => [],
