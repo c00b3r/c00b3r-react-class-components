@@ -9,6 +9,7 @@ import { loader as loaderPersonData } from "./pages/DetailPage/DetailPageLoader.
 import DetailPage from "./pages/DetailPage/DetailPage.tsx";
 import { Provider } from "react-redux";
 import store from "./store/store.ts";
+import { ThemeProvider } from "./context/LightDarkThemeContext.tsx";
 
 const root = createBrowserRouter([
   {
@@ -29,7 +30,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorBoundary fallback={<p>Something went wrong, check console.</p>}>
-        <RouterProvider router={root} />
+        <ThemeProvider>
+          <RouterProvider router={root} />
+        </ThemeProvider>
       </ErrorBoundary>
     </Provider>
   </React.StrictMode>,

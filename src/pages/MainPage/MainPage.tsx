@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Data } from "../../interface";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -7,6 +7,7 @@ import "./MainPage.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { starWarsApi } from "../../store/thunks/starWarsApi";
 import FlyoutComponent from "../../components/FlyoutComponent/FlyoutComponent";
+import DarkLightThemeContext from "../../context/LightDarkThemeContext";
 
 export default function MainPage() {
   const [dataOfPeople, setDataOfPeople] = useState<Data | undefined>({
@@ -23,6 +24,7 @@ export default function MainPage() {
     searchParam: searchParams.get("search") || localStorageItem,
     page: parseInt(searchParams.get("page") || "1", 10),
   });
+  const themeContext = useContext(DarkLightThemeContext);
 
   function handleSearch(searchParam: string): void {
     const trimmedSearchParam = searchParam.trim();
@@ -41,13 +43,24 @@ export default function MainPage() {
     }
   }, [data]);
 
+  if (!themeContext) {
+    return null;
+  }
+
+  const { theme, toggleTheme } = themeContext;
+
   return (
-    <div className="main-page">
+    <div className={`main-page ${theme}`}>
       <div className="main-wrapper">
-        <SearchBar
-          onSearch={handleSearch}
-          updateLocalStorageItem={setLocalStorageItem}
-        />
+        <div className="header">
+          <SearchBar
+            onSearch={handleSearch}
+            updateLocalStorageItem={setLocalStorageItem}
+          />
+          <button onClick={toggleTheme} className="switch-theme">
+            Switch to {theme === "dark" ? "Light" : "Dark"} Theme
+          </button>
+        </div>
         {isLoading ? (
           <h3 className="loading-container">Loading data, please wait</h3>
         ) : (

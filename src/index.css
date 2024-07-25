@@ -5,7 +5,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -66,4 +65,42 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+body {
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+body.dark {
+  background-color: #242424;
+  color: #ffffff;
+}
+
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.light button {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+
+body.light input {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+
+body.light a {
+  background-color: white;
+  color: black;
+}
+
+body.light input[type="checkbox"] {
+  accent-color: black;
+  background-color: rgb(168, 168, 168);
 }

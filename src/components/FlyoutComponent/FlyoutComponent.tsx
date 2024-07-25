@@ -13,12 +13,14 @@ export default function FlyoutComponent() {
   }
 
   function convertToCSV(items: PeopleInfo[]): string {
-    const csvContent = items
-      .map(
+    const headers = ["Name", "Birth Year", "Gender", "Height"];
+    const csvContent = [
+      headers.join(","),
+      ...items.map(
         (item) =>
           `${item.name},${item.birthYear},${item.gender},${item.height}`,
-      )
-      .join("\n");
+      ),
+    ].join("\n");
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     return URL.createObjectURL(blob);
   }
