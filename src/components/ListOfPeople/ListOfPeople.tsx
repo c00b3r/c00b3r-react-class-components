@@ -2,6 +2,9 @@ import { Dispatch, SetStateAction } from "react";
 import { Data } from "../../interface";
 import "./styles.css";
 import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
+import { toggleItem } from "../../store/slices/selectedItemsSlice";
 
 interface ListOfPeopleProps {
   data: Data;
@@ -14,8 +17,16 @@ export default function ListOfPeople({
   page,
   setPage,
 }: ListOfPeopleProps) {
+  const dispatch: AppDispatch = useDispatch();
+  const selectedItems = useSelector((state: RootState) => state.selectedItem);
+  console.log(selectedItems);
+
   const result = data.results;
   const location = useLocation();
+
+  const handleCheckboxChange = (peopleName: string) => {
+    dispatch(toggleItem(peopleName));
+  };
 
   const handlePreviousClick = () => {
     if (page > 1) {
@@ -40,6 +51,11 @@ export default function ListOfPeople({
                 `person-wrapper ${isActive ? "active" : ""} ${isPending ? "pending" : ""}`
               }
             >
+              <input
+                type="checkbox"
+                checked={selectedItems.includes(peopleItem.name)}
+                onChange={() => handleCheckboxChange(peopleItem.name)}
+              />
               <h3 className="person-name">{peopleItem.name}</h3>
             </NavLink>
           ))
