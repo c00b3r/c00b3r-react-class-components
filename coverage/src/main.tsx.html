@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/30</span>
+                <span class='fraction'>0/37</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/30</span>
+                <span class='fraction'>0/37</span>
             </div>
         
             
@@ -95,7 +95,32 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -109,17 +134,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -136,12 +150,14 @@
 <span class="cstat-no" title="statement not covered" >import MainPage from "./pages/MainPage/MainPage.tsx";</span>
 <span class="cstat-no" title="statement not covered" >import { loader as loaderPersonData } from "./pages/DetailPage/DetailPageLoader.ts";</span>
 <span class="cstat-no" title="statement not covered" >import DetailPage from "./pages/DetailPage/DetailPage.tsx";</span>
+<span class="cstat-no" title="statement not covered" >import { Provider } from "react-redux";</span>
+<span class="cstat-no" title="statement not covered" >import store from "./store/store.ts";</span>
+<span class="cstat-no" title="statement not covered" >import { ThemeProvider } from "./context/LightDarkThemeContext.tsx";</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >const root = createBrowserRouter([</span>
 <span class="cstat-no" title="statement not covered" >  {</span>
 <span class="cstat-no" title="statement not covered" >    path: "/",</span>
 <span class="cstat-no" title="statement not covered" >    element: &lt;MainPage /&gt;,</span>
-<span class="cstat-no" title="statement not covered" >    errorElement: &lt;ErrorPage /&gt;,</span>
 <span class="cstat-no" title="statement not covered" >    children: [</span>
 <span class="cstat-no" title="statement not covered" >      {</span>
 <span class="cstat-no" title="statement not covered" >        path: "/people/:id",</span>
@@ -149,14 +165,19 @@
 <span class="cstat-no" title="statement not covered" >        loader: loaderPersonData,</span>
 <span class="cstat-no" title="statement not covered" >      },</span>
 <span class="cstat-no" title="statement not covered" >    ],</span>
+<span class="cstat-no" title="statement not covered" >    errorElement: &lt;ErrorPage /&gt;,</span>
 <span class="cstat-no" title="statement not covered" >  },</span>
 <span class="cstat-no" title="statement not covered" >]);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >ReactDOM.createRoot(document.getElementById("root")!).render(</span>
 <span class="cstat-no" title="statement not covered" >  &lt;React.StrictMode&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;ErrorBoundary fallback={&lt;p&gt;Something went wrong, check console.&lt;/p&gt;}&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;RouterProvider router={root} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/ErrorBoundary&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;Provider store={store}&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;ErrorBoundary fallback={&lt;p&gt;Something went wrong, check console.&lt;/p&gt;}&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;ThemeProvider&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;RouterProvider router={root} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/ThemeProvider&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/ErrorBoundary&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/Provider&gt;</span>
 <span class="cstat-no" title="statement not covered" >  &lt;/React.StrictMode&gt;,</span>
 <span class="cstat-no" title="statement not covered" >);</span>
 &nbsp;</pre></td></tr></table></pre>
@@ -166,7 +187,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-14T14:14:31.325Z
+                at 2024-07-26T18:32:29.272Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import "./DetailPage.css";
 import { personData } from "../../interface";
@@ -19,7 +19,8 @@ export default function DetailPage() {
       if (
         ref.current &&
         !ref.current.contains(event.target as Node) &&
-        !target.closest("a")
+        !target.closest("a") &&
+        !target.closest("input")
       ) {
         navigate(`/${location.search}`);
       }

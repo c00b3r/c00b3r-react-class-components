@@ -7,12 +7,14 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage.tsx";
 import MainPage from "./pages/MainPage/MainPage.tsx";
 import { loader as loaderPersonData } from "./pages/DetailPage/DetailPageLoader.ts";
 import DetailPage from "./pages/DetailPage/DetailPage.tsx";
+import { Provider } from "react-redux";
+import store from "./store/store.ts";
+import { ThemeProvider } from "./context/LightDarkThemeContext.tsx";
 
 const root = createBrowserRouter([
   {
     path: "/",
     element: <MainPage />,
-    errorElement: <ErrorPage />,
     children: [
       {
         path: "/people/:id",
@@ -20,13 +22,18 @@ const root = createBrowserRouter([
         loader: loaderPersonData,
       },
     ],
+    errorElement: <ErrorPage />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ErrorBoundary fallback={<p>Something went wrong, check console.</p>}>
-      <RouterProvider router={root} />
-    </ErrorBoundary>
+    <Provider store={store}>
+      <ErrorBoundary fallback={<p>Something went wrong, check console.</p>}>
+        <ThemeProvider>
+          <RouterProvider router={root} />
+        </ThemeProvider>
+      </ErrorBoundary>
+    </Provider>
   </React.StrictMode>,
 );
