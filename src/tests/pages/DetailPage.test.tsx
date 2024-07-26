@@ -5,17 +5,6 @@ import { loader as loaderPersonData } from "../../pages/DetailPage/DetailPageLoa
 import { vi } from "vitest";
 import "@testing-library/jest-dom";
 
-vi.mock("../../service/api", () => ({
-  fetchDataOfPersonApi: vi.fn(() =>
-    Promise.resolve({
-      height: "172",
-      mass: "77",
-      birth_year: "1980",
-      gender: "male",
-    }),
-  ),
-}));
-
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {
   const actual = await vi.importActual("react-router-dom");
@@ -47,7 +36,7 @@ describe("DetailPage", () => {
       expect(screen.getByText(/Mass:/)).toBeInTheDocument();
       expect(screen.getByText("77")).toBeInTheDocument();
       expect(screen.getByText(/BirthYear:/)).toBeInTheDocument();
-      expect(screen.getByText("1980")).toBeInTheDocument();
+      expect(screen.getByText("19BBY")).toBeInTheDocument();
       expect(screen.getByText(/Gender:/)).toBeInTheDocument();
       expect(screen.getByText("male")).toBeInTheDocument();
     });
@@ -62,6 +51,20 @@ describe("DetailPage", () => {
 
     const closeButton = await screen.findByRole("button", { name: /Close/i });
     fireEvent.click(closeButton);
+
+    expect(navigateMock).toHaveBeenCalledWith("/");
+  });
+
+  it("should navigate to correct URL when clicking outside the component", () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ["/people/1"],
+    });
+
+    render(<RouterProvider router={router} />);
+
+    const outsideElement = document.createElement("div");
+    document.body.appendChild(outsideElement);
+    fireEvent.click(outsideElement);
 
     expect(navigateMock).toHaveBeenCalledWith("/");
   });
